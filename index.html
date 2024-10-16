@@ -18,7 +18,7 @@
             console.log('Data being sent:', JSON.stringify(data));
 
             // Trigger the Airtable webhook with the selected option
-            fetch('https://hooks.airtable.com/workflows/v1/genericWebhook/appkmKp9Haa5rEDvx/wfllK5GQwWbIiwdOn/wtrkW9VRAxvDS8J7z', {
+            fetch('http://localhost:3000/webhook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
