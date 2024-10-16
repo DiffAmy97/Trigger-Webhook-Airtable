@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trigger Zapier and Close</title>
+    <title>Trigger Airtable Webhook and Close</title>
     <script>
-        // Trigger the Zapier webhook
-        fetch('https://hooks.airtable.com/workflows/v1/genericWebhook/appkmKp9Haa5rEDvx/wfllK5GQwWbIiwdOn/wtrkW9VRAxvDS8J7z')
-            .then(response => {
-                // Log the response to the console for debugging
+        // Trigger the Airtable webhook
+        fetch('https://hooks.airtable.com/workflows/v1/genericWebhook/appkmKp9Haa5rEDvx/wfllK5GQwWbIiwdOn/wtrkW9VRAxvDS8J7z', {
+            method: 'POST'
+        })
+        .then(response => {
+            if (response.ok) {
+                // Webhook triggered successfully
                 console.log('Webhook triggered successfully:', response);
-                // After the webhook is triggered, close the tab
-                window.close();
-            })
-            .catch(error => {
-                // Log any errors to the console for debugging
-                console.error('Error triggering the webhook:', error);
-                // Close the tab even if there's an error
-                window.close();
-            });
+            } else {
+                // Handle any errors
+                console.error('Error triggering the webhook:', response.statusText);
+            }
+            // Attempt to close the window (may not work depending on the browser)
+            window.close();
+        })
+        .catch(error => {
+            console.error('Error triggering the webhook:', error);
+            // Attempt to close the window even if there's an error
+            window.close();
+        });
     </script>
 </head>
 <body>
-    <p>Triggering Zapier...</p>
+    <p>Triggering Airtable Webhook...</p>
 </body>
 </html>
