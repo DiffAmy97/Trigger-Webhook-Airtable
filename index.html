@@ -15,27 +15,26 @@
             };
 
             // Trigger the Airtable webhook with the selected option
-            fetch('https://hooks.airtable.com/workflows/v1/genericWebhook/appkmKp9Haa5rEDvx/wfllK5GQwWbIiwdOn/wtrkW9VRAxvDS8J7z', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Webhook triggered successfully:', response);
-                } else {
-                    console.error('Error triggering the webhook:', response.statusText);
-                }
-                // Attempt to close the window
-                window.close();
-            })
-            .catch(error => {
-                console.error('Error triggering the webhook:', error);
-                // Close the window even if there's an error
-                window.close();
-            });
+           fetch('https://hooks.airtable.com/workflows/v1/genericWebhook/appkmKp9Haa5rEDvx/wfllK5GQwWbIiwdOn/wtrkW9VRAxvDS8J7z', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => {
+    if (response.ok) {
+        console.log('Webhook triggered successfully:', response);
+    } else {
+        console.error('Error triggering the webhook:', response.statusText);
+    }
+    // Temporarily comment out or remove window.close() for debugging
+    // window.close();
+})
+.catch(error => {
+    console.error('Error triggering the webhook:', error);
+    // window.close();
+});
         }
     </script>
 </head>
