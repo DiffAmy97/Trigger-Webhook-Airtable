@@ -3,52 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trigger Airtable Webhook</title>
-    <script>
-        function triggerWebhook() {
-            // Get the user's selected choice from the dropdown
-            const selectedOption = document.getElementById('choiceSelect').value;
-            
-            // Prepare the data to send in the webhook
-            const data = {
-                userSelection: selectedOption
-            };
-
-            // Log the data being sent for debugging purposes
-            console.log('Data being sent:', JSON.stringify(data));
-
-            // Trigger the Airtable webhook with the selected option
-            fetch('http://localhost:3000/webhook', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Webhook triggered successfully:', response);
-                } else {
-                    console.error('Error triggering the webhook:', response.statusText);
-                }
-            })
-            .catch(error => {
-                console.error('Error triggering the webhook:', error);
-            });
-        }
-    </script>
+    <title>Processing...</title>
 </head>
 <body>
-    <h1>Please select Account</h1>
-    <p>From Which Account have all Beneficiaries Been Paid?</p>
-    
-    <!-- Dropdown menu for multiple choices -->
-    <select id="choiceSelect">
-        <option value="Queens Gems">Queens Gems</option>
-        <option value="Gem California">Gem California</option>
-    </select><br><br>
-    
-    <!-- Button to trigger the webhook -->
-    <button onclick="triggerWebhook()">Submit</button>
+    <p>If this page doesn't close automatically, please close it manually.</p>
+    <script>
+        // Get Zapier webhook URL from query string
+        const params = new URLSearchParams(window.location.search);
+        const zapierUrl = params.get("url");
+
+        if (zapierUrl) {
+            fetch(zapierUrl, { method: "POST" }) // Send request to Zapier
+                .then(() => setTimeout(() => window.close(), 2000)) // Close tab in 2 sec
+                .catch(() => setTimeout(() => window.close(), 2000));
+        } else {
+            document.body.innerHTML = "<p>Error: No URL provided.</p>";
+        }
+    </script>
 </body>
 </html>
